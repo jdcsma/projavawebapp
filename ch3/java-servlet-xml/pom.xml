@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jun.projavawebapp</groupId>
-    <artifactId>jun-projavawebapp-javaservlet</artifactId>
+    <artifactId>java-servlet-xml</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>java-servlet</name>
-    <description>Demo project for java servlet</description>
+    <name>java-servlet-xml</name>
+    <description>Demo project for java servlet with xml</description>
     <packaging>war</packaging>
 
     <properties>
