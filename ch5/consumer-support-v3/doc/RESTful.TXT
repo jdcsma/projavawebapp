@@ -1,0 +1,52 @@
+1. login
+
+	GET http://localhost/consumer-support/v3/login
+	
+		显示登陆页面
+		
+	GET http://localhost/consumer-support/v3/login?logout
+	
+		处理用户登出
+		
+	POST http://localhost/consumer-support/v3/login
+	
+		处理用户登陆
+
+2. ticket
+
+	GET	http://localhost/consumer-support/v3/ticket
+	
+		显示票据创建页面
+	
+	GET http://localhost/consumer-support/v3/ticket?ticketId=1
+		
+		显示票据预览页面
+		
+	POST http://localhost/consumer-support/v3/ticket
+	
+		处理票据创建
+
+3. tickets
+
+	GET http://localhost/consumer-support/v3/ticketList
+	
+		显示票据列表页面
+		
+4. attachment
+
+	GET http://localhost/consumer-support/v3/attachment?ticketId=1&file1=fileName
+	
+		下载票据附件
+		
+	POST http://localhost/consumer-support/v3/attachment
+	
+		添加票据附件
+		
+5. sessions
+
+	GET http://localhost/consumer-support/v3/sessions
+	
+		显示回话列表页面
+		
+		
+		
