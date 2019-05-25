@@ -8,38 +8,22 @@ import java.io.IOException;
 
 public final class SessionInspector {
 
-    public static boolean authorize(
-            HttpSession session, HttpServletResponse response,
-            String authorizedRedirect) throws IOException {
-
-        if (session.getAttribute("username") == null) {
-            return false;
-        }
-
-        handleRedirect(response, authorizedRedirect);
-
-        return true;
+    public static boolean hasAuthorized(HttpSession session) {
+        return session.getAttribute("username") != null;
     }
 
-    public static boolean illegal(
+    public static boolean hasAuthorized(
             HttpSession session, HttpServletResponse response,
-            String illegalRedirect) throws IOException {
+            String redirect) throws IOException {
 
-        if (session.getAttribute("username") != null) {
-            return false;
+        if (hasAuthorized(session)) {
+            return true;
         }
-
-        handleRedirect(response, illegalRedirect);
-
-        return true;
-    }
-
-    private static void handleRedirect(
-            HttpServletResponse response, String redirect)
-            throws IOException {
 
         if (StringUtils.isNoneEmpty(redirect)) {
             response.sendRedirect(redirect);
         }
+
+        return false;
     }
 }

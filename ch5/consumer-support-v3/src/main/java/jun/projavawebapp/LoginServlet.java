@@ -40,19 +40,21 @@ public class LoginServlet extends HttpServlet {
 
         switch (action) {
             case "logout":
-                if (req.getSession().getAttribute("username") != null) {
+                if (SessionInspector.hasAuthorized(req.getSession())) {
                     req.getSession().invalidate();
                 }
                 resp.sendRedirect("login");
                 break;
             default:
-                if (!SessionInspector.authorize(
-                        req.getSession(), resp, "ticketList"))
-                {
+
+                if (SessionInspector.hasAuthorized(req.getSession())) {
+                    resp.sendRedirect("ticketList");
+                } else {
                     req.setAttribute("loginFailed", false);
                     req.getRequestDispatcher("/WEB-INF/jsp/view/login.jsp")
                             .forward(req, resp);
                 }
+
                 break;
         }
     }
@@ -62,9 +64,8 @@ public class LoginServlet extends HttpServlet {
             HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-
-        if (SessionInspector.authorize(
-                req.getSession(), resp, "ticketList")) {
+        if (SessionInspector.hasAuthorized(req.getSession())) {
+            resp.sendRedirect("ticketList");
             return;
         }
 

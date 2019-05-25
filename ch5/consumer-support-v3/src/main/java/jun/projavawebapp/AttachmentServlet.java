@@ -1,5 +1,9 @@
 package jun.projavawebapp;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -8,9 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @WebServlet(name = "attachmentServlet",
-    urlPatterns = "/v3/attachment")
+        urlPatterns = "/v3/attachment")
 public class AttachmentServlet extends HttpServlet {
 
     @Override
@@ -18,16 +25,16 @@ public class AttachmentServlet extends HttpServlet {
             HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        if (SessionInspector.illegal(
+        if (!SessionInspector.hasAuthorized(
                 req.getSession(), resp, "login")) {
             return;
         }
 
         String ticketId = req.getParameter("ticketId");
-        String attachment = req.getParameter("attachment");
+        String attachmentName = req.getParameter("attachment");
 
         if (StringUtils.isEmpty(ticketId) ||
-                StringUtils.isEmpty(attachment)) {
+                StringUtils.isEmpty(attachmentName)) {
             resp.sendRedirect("ticketList");
             return;
         }
@@ -39,12 +46,13 @@ public class AttachmentServlet extends HttpServlet {
             return;
         }
 
-        if (ticket.hasAttachment(attachment)) {
-            AttachmentSupport.downloadAttachment(
-                    ticket.getAttachment(attachment), resp);
-        }
+        Attachment attachment = ticket.getAttachment(attachmentName);
 
-        resp.sendRedirect("ticket?ticketId=" + ticketId);
+        if (attachment != null) {
+            AttachmentSupport.download(attachment, resp);
+        } else {
+            resp.sendRedirect("ticket?ticketId=" + ticketId);
+        }
     }
 
     @Override
@@ -52,12 +60,21 @@ public class AttachmentServlet extends HttpServlet {
             HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        if (SessionInspector.illegal(
+        if (!SessionInspector.hasAuthorized(
                 req.getSession(), resp, "login")) {
             return;
         }
 
-        String ticketId = req.getParameter("ticketId");
+        String ticketId;
+        List<Attachment> attachments = new ArrayList<>();
+
+        try {
+            ticketId = AttachmentSupport.receive(req, attachments);
+        } catch (FileUploadException e) {
+            resp.sendRedirect("ticketList");
+            return;
+        }
+
         Ticket ticket = TicketRepository.getTicket(ticketId);
 
         if (ticket == null) {
@@ -65,10 +82,7 @@ public class AttachmentServlet extends HttpServlet {
             return;
         }
 
-        Attachment attachment = AttachmentSupport
-                .receiveAttachment(req.getPart("file1"));
-
-        if (attachment != null) {
+        for (Attachment attachment : attachments) {
             ticket.addAttachment(attachment);
         }
 
