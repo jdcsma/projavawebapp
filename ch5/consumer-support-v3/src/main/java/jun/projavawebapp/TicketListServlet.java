@@ -18,7 +18,7 @@ public class TicketListServlet extends HttpServlet {
             HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        if (SessionInspector.illegal(
+        if (!SessionInspector.hasAuthorized(
                 req.getSession(), resp, "login")) {
             return;
         }

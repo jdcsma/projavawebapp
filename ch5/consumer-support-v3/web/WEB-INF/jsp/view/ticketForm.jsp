@@ -3,7 +3,9 @@
     <title>Consumer Support v3</title>
 </head>
 <body>
-    <a href="<c:url value="login?logout"/>">退出</a><br/>
+    <a href="<c:url value="login">
+            <c:param name="action" value="logout"/>
+        </c:url>">退出</a><br/>
     <h2>创建票据</h2>
     <form method="post" action="ticket" enctype="multipart/form-data">
         主题<br/>

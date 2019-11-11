@@ -37,22 +37,24 @@ public class TicketBuilder {
 
     public TicketBuilder addAttachment(Attachment attachment) {
         if (attachment != null) {
-            if (this.attachments == null) {
-                this.attachments = new LinkedHashMap<>();
+            if (attachments == null) {
+                attachments = new LinkedHashMap<>();
             }
-            this.attachments.put(
-                    attachment.getName(), attachment);
+            attachments.put(attachment.getName(), attachment);
         }
         return this;
     }
 
     public Ticket build() throws NullPointerException {
+
         Objects.requireNonNull(this.consumer, "consumer must not null");
         Objects.requireNonNull(this.subject, "subject must not null");
         Objects.requireNonNull(this.body, "body must not null");
+
         synchronized (guard) {
             this.id = sequence++;
         }
+
         return new Ticket(this.id,
                 this.consumer, this.subject,
                 this.body, this.attachments);

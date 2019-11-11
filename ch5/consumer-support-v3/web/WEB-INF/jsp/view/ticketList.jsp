@@ -10,7 +10,9 @@
         Collection<Ticket> tickets =
                 (Collection) request.getAttribute("tickets");
     %>
-    <a href="<c:url value="login?logout"/>">退出</a><br/>
+    <a href="<c:url value="login">
+        <c:param name="action" value="logout"/>
+    </c:url>">退出</a><br/>
     <h2>票据列表</h2>
     <%
         if (tickets.size() == 0) {
@@ -22,7 +24,7 @@
             for (Ticket ticket : tickets) {
                 String ticketId = Integer.toString(ticket.getId());
     %>
-        Ticket #<%= ticketId %>: <a href="<c:url value="/v3/ticket">
+        Ticket #<%= ticketId %>: <a href="<c:url value="ticket">
                 <c:param name="ticketId" value="<%= ticketId %>"/>
             </c:url>"><%= ticket.getSubject() %></a>（客户：
             <%= ticket.getConsumer() %>）<br/>
@@ -31,6 +33,6 @@
         }
     %>
     <br/><br/>
-    <a href="<c:url value="/v3/ticket"/>">创建票据</a>
+    <a href="<c:url value="ticket"/>">创建票据</a>
 </body>
 </html>

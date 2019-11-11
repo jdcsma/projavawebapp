@@ -2,7 +2,7 @@
 <%@ page import="java.io.IOException" %>
 
 <%!
-    private static String writeSessionStatus(
+    private static void writeSessionStatus(
             HttpSession session, JspWriter writer,
             long timestamp) throws IOException {
 
@@ -32,22 +32,23 @@
     <title>Consumer Support v3</title>
 </head>
 <body>
-    <a href="<c:url value="login?logout"/>">退出</a><br/>
-    <h2>会话列表</h2>
-    <%
-        @SuppressWarnings("unchecked")
-        Collection<HttpSession> sessions =
-                (Collection) request.getAttribute("sessions");
-    %>
-    目前在应用程序中存在<%= sessions.size() %>个活动的会话。<br/>
-    <%
-        long timestamp = System.currentTimeMillis();
+<a href="<c:url value="login">
+        <c:param name="action" value="logout"/>
+    </c:url>">退出</a><br/>
+<h2>会话列表</h2>
+<%
+    @SuppressWarnings("unchecked")
+    Collection<HttpSession> sessions =
+            (Collection) request.getAttribute("sessions");
+%>
+目前在应用程序中存在<%= sessions.size() %>个活动的会话。<br/>
+<%
+    long timestamp = System.currentTimeMillis();
 
-        for (HttpSession s : sessions)
-        {
-            writeSessionStatus(s, out, timestamp);
-        }
-    %>
+    for (HttpSession s : sessions) {
+        writeSessionStatus(s, out, timestamp);
+    }
+%>
 
 </body>
 </html>
