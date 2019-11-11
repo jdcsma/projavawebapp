@@ -1,5 +1,7 @@
 package jun.projavawebapp;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,14 @@ public class JavaServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         System.out.println("Servlet " + this.getServletName() + " has started.");
+
+        ServletContext context = this.getServletContext();
+        System.out.println("ServletContextParam:" +
+                context.getInitParameter("ServletContextParamName"));
+
+        ServletConfig config = this.getServletConfig();
+        System.out.println("ServletConfigParam:" +
+                config.getInitParameter("ServletConfigParamName"));
     }
 
     @Override

@@ -5,11 +5,5 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <display-name>Java Servlet</display-name>
-
-    <context-param>
-        <param-name>ServletContextParamName</param-name>
-        <param-value>ServletContextParamValue</param-value>
-    </context-param>
-
+    <display-name>Hello World JSP Application</display-name>
 </web-app>

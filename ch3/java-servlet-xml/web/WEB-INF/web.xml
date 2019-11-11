@@ -11,7 +11,16 @@
         <servlet-name>javaServlet</servlet-name>
         <servlet-class>jun.projavawebapp.JavaServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
+        <init-param>
+            <param-name>ServletConfigParamName</param-name>
+            <param-value>ServletConfigParamValue</param-value>
+        </init-param>
     </servlet>
+
+    <context-param>
+        <param-name>ServletContextParamName</param-name>
+        <param-value>ServletContextParamValue</param-value>
+    </context-param>
 
     <servlet-mapping>
         <servlet-name>javaServlet</servlet-name>

@@ -1,6 +1,9 @@
 package jun.projavawebapp;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +14,12 @@ import java.io.PrintWriter;
 @WebServlet(
         name = "javaServlet",
         urlPatterns = "/home",
-        loadOnStartup = 1)
+        loadOnStartup = 1,
+        initParams = {
+                @WebInitParam(
+                        name = "ServletConfigParamName",
+                        value = "ServletConfigParamValue")
+        })
 public class JavaServlet extends HttpServlet {
 
     @Override
@@ -36,6 +44,14 @@ public class JavaServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         System.out.println("Servlet " + this.getServletName() + " has started.");
+
+        ServletContext context = this.getServletContext();
+        System.out.println("ServletContextParam:" +
+                context.getInitParameter("ServletContextParamName"));
+
+        ServletConfig config = this.getServletConfig();
+        System.out.println("ServletConfigParam: " +
+                config.getInitParameter("ServletConfigParamName"));
     }
 
     @Override
