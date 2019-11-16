@@ -41,6 +41,9 @@ public class StoreServlet extends HttpServlet {
             case "viewCart":
                 this.viewCart(req, resp);
                 break;
+            case "emptyCart":
+                this.emptyCart(req, resp);
+                break;
             case "browse":
             default:
                 this.browse(req, resp);
@@ -85,6 +88,14 @@ public class StoreServlet extends HttpServlet {
         request.setAttribute("products", this.products);
         request.getRequestDispatcher("WEB-INF/jsp/view/viewCart.jsp")
                 .forward(request, response);
+    }
+
+    private void emptyCart(HttpServletRequest request,
+                           HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("cart");
+        response.sendRedirect("shop?action=viewCart");
     }
 
     private void browse(HttpServletRequest request,

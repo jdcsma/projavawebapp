@@ -3,8 +3,8 @@
 
 <%!
     private static void writeSessionStatus(
-            HttpSession session, JspWriter writer,
-            long timestamp) throws IOException {
+            HttpSession currSession, HttpSession session,
+            JspWriter writer, long timestamp) throws IOException {
 
         long timeInterval = timestamp - session.getLastAccessedTime();
 
@@ -17,9 +17,12 @@
             timeText = "大约 " + (timeInterval / 60_000) + " 分钟";
         }
 
-        writer.print(session.getId() + " - " + session.getAttribute("username"));
+        String who = session.getAttribute("username") != null ?
+                (String) session.getAttribute("username") : "Unknown";
 
-        if (session.getId().equals(session.getId())) {
+        writer.print(session.getId() + " - " + who);
+
+        if (currSession.getId().equals(session.getId())) {
             writer.print(" (你)");
         }
 
@@ -46,7 +49,7 @@
     long timestamp = System.currentTimeMillis();
 
     for (HttpSession s : sessions) {
-        writeSessionStatus(s, out, timestamp);
+        writeSessionStatus(session, s, out, timestamp);
     }
 %>
 

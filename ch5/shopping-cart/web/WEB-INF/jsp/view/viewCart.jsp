@@ -23,6 +23,13 @@
             out.println(products.get(id) + " (qty: " + cart.get(id) + ")<br/>");
         }
     }
+
+    if (cart != null && cart.size() > 0) {
+%>
+    <br/>
+    <a href="<c:url value="/shop"> <c:param name="action" value="emptyCart"/></c:url>">Empty Cart</a>
+<%
+    }
 %>
 </body>
 </html>
