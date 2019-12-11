@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="trace">
+    <Properties>
+        <Property name="consoleLayoutPattern">
+            %highlight{%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n}
+        </Property>
+        <Property name="fileLayoutPattern">
+            %d{HH:mm:ss.SSS} [%t] %X{id} %X{username} %-5level %c{36} %l: %msg%n
+        </Property>
+    </Properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${consoleLayoutPattern}"/>
+        </Console>
+        <RollingFile name="RollingFileAppender" fileName="${sys:catalina.base}/logs/application.${date:yyyy-MM-dd}.log"
+                     filePattern="${sys:catalina.base}/logs/application.%d{yyyy-MM-dd}.%i.log">
+            <PatternLayout>
+                <pattern>${fileLayoutPattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="4"/>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="trace">
+            <appender-ref ref="Console"/>
+        </root>
+        <logger name="jun.projavawebapp" level="trace" additivity="false">
+            <appender-ref ref="RollingFileAppender">
+                <MarkerFilter marker="LOG_CONSOLE" onMatch="NEUTRAL"
+                              onMismatch="DENY"/>
+            </appender-ref>
+            <appender-ref ref="Console"/>
+        </logger>
+
+        <!-- Print message in JSP (The Log4j Log Tag Library). -->
+        <logger name="org.apache" level="trace">
+            <appender-ref ref="RollingFileAppender"/>
+        </logger>
+    </loggers>
+</configuration>
+
