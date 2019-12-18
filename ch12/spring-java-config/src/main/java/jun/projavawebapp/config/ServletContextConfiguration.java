@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"jun.projavawebapp.site"},
-        includeFilters = @ComponentScan.Filter(Controller.class))
+        includeFilters = {@ComponentScan.Filter(Controller.class)})
 public class ServletContextConfiguration implements WebMvcConfigurer {
 
     @Override

@@ -6,6 +6,4 @@
 
     <bean name="greetingService" class="jun.projavawebapp.GreetingServiceImpl"/>
 
-    <bean name="SpringBeanAwarer" class="jun.projavawebapp.SpringBeanAwarer"/>
-
 </beans>

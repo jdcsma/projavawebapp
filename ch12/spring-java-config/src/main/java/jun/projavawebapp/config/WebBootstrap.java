@@ -37,10 +37,11 @@ public class WebBootstrap implements WebApplicationInitializer {
          *     <param-value>WEB-INF/rootContext.xml</param-value>
          * </context-param>
          */
-        // Register Root context for servlet.
         AnnotationConfigWebApplicationContext rootContext =
                 new AnnotationConfigWebApplicationContext();
         rootContext.register(RootContextConfiguration.class);
+
+        // Register Root context into global servlet.
         container.addListener(new ContextLoaderListener(rootContext));
 
         // The rootContext's display name is "Root WebApplicationContext".
@@ -56,10 +57,11 @@ public class WebBootstrap implements WebApplicationInitializer {
          *     <load-on-startup>1</load-on-startup>
          * </servlet>
          */
-        // Register servlet context for customized servlet.
         AnnotationConfigWebApplicationContext servletContext =
                 new AnnotationConfigWebApplicationContext();
         servletContext.register(ServletContextConfiguration.class);
+
+        // Register servlet context into customized servlet.
         ServletRegistration.Dynamic dispatcher = container.addServlet(
                 "springDispatcher", new DispatcherServlet(servletContext));
         dispatcher.setLoadOnStartup(1);
@@ -82,7 +84,8 @@ public class WebBootstrap implements WebApplicationInitializer {
         // We register the Spring DispatcherServlet to the / path.
         // This replaces the DefaultServlet; therefore we have to
         // register a default servlet handler in the ServletContextConfiguration
-        // configuration file.
+        // configuration file (use DefaultServletHandlerConfigurer.enable method in
+        // WebMvcConfigurer.configureDefaultServletHandling method).
         dispatcher.addMapping("/");
     }
 }
