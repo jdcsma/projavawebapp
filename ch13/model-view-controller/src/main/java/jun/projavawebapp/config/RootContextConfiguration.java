@@ -18,6 +18,7 @@ public class RootContextConfiguration {
 
     private final static Logger logger = LogManager.getLogger();
 
+    // 实例化 XML 转换器实现。
     @Bean
     public ObjectMapper objectMapper() {
         logger.traceEntry();
@@ -28,9 +29,11 @@ public class RootContextConfiguration {
         return logger.traceExit(mapper);
     }
 
+    // 实例化 JSON 转换器实现。
     @Bean
     public Jaxb2Marshaller jaxb2Marshaller() {
         logger.traceEntry();
+        //
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setPackagesToScan(new String[]{"jun.projavawebapp.site.entity"});
         return logger.traceExit(marshaller);
