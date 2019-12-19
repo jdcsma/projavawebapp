@@ -10,7 +10,6 @@
     <name>model-view-controller</name>
     <packaging>war</packaging>
 
-
     <properties>
         <java.version>1.8</java.version>
         <log4j.version>2.12.1</log4j.version>
@@ -213,6 +212,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
