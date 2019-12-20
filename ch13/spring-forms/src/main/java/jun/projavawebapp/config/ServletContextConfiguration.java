@@ -35,6 +35,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"jun.projavawebapp.site"},
+        useDefaultFilters = false,
         includeFilters = {@ComponentScan.Filter(Controller.class)})
 public class ServletContextConfiguration implements WebMvcConfigurer {
 

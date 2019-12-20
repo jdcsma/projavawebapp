@@ -11,6 +11,17 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+/**
+ * 该类以编程的方式代替传统的 web.xml（或与 web.xml 联合）来配置 ServletContext。
+ *
+ * Interface to be implemented in Servlet 3.0+ environments in order to
+ * configure the ServletContext programmatically -- as opposed to (or possibly in
+ * conjunction with) the traditional web.xml-based approach.
+ *
+ * Implementations of this SPI will be detected automatically by SpringServletContainerInitializer,
+ * which itself is bootstrapped automatically by any Servlet 3.0 container. See its Javadoc for
+ * details on this bootstrapping mechanism.
+ */
 public class WebBootstrap implements WebApplicationInitializer {
 
     private final static Logger logger = LogManager.getLogger();

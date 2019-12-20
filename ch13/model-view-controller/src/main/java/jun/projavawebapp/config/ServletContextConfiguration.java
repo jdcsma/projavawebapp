@@ -32,9 +32,22 @@ import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 该类用于配置接受、处理和响应 HTTP 请求相关的 bean 和 context
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"jun.projavawebapp.site"},
+        /**
+         * useDefaultFilters 为 true:
+         *      默认没有排除过滤器（excludeFilters），只包含一个包含过滤器（includeFilters）。
+         *      包含过滤器将检查类是否标记了 @Component，或者是否标记了使用 @Component 作为元数据
+         *      注解创建的注解。
+         *
+         * useDefaultFilters 为 false:
+         *      指定的过滤器将取代默认的过滤器。
+         */
+        useDefaultFilters = false,
         includeFilters = {@ComponentScan.Filter(Controller.class)})
 public class ServletContextConfiguration implements WebMvcConfigurer {
 

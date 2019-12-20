@@ -11,8 +11,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Controller;
 
+/**
+ * 该类用于配置全局共享的 bean
+ */
 @Configuration
 @ComponentScan(basePackages = {"jun.projavawebapp.site"},
+        /**
+         * 将同时包含默认包含过滤器和排除过滤器。
+         */
         excludeFilters = {@ComponentScan.Filter(Controller.class)})
 public class RootContextConfiguration {
 
