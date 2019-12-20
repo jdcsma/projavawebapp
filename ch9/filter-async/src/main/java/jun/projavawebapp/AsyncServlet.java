@@ -30,8 +30,8 @@ public class AsyncServlet extends HttpServlet {
                 ", isAsyncStarted = " + req.isAsyncStarted());
 
         /**
-         * 当前 req 为 AnyRequestFilter 调用 chain.doFilter 传入的 HttpServletRequestWrapper
-         * 当前 resp 为 AnyRequestFilter 调用 chain.doFilter 传入的 HttpServletResponseWrapper
+         * 当前 req 为 AnyRequestFilter 调用 chain.doFilter 方法时传入的 HttpServletRequestWrapper 对象实例
+         * 当前 resp 为 AnyRequestFilter 调用 chain.doFilter 方法时传入的 HttpServletResponseWrapper 对象实例
          */
         final AsyncContext context = req.getParameter("unwrap") != null
                 // AsyncContext 将使用原始的请求和响应对象：HttpServletRequest 和 HttpServletResponse
@@ -42,7 +42,8 @@ public class AsyncServlet extends HttpServlet {
 
         System.out.println("Starting asynchronous thread. Request ID = " + id);
 
-        context.start(new AsyncThread(id, context)::doWork);
+        Runnable runnable = new AsyncThread(id, context)::doWork;
+        context.start(runnable);
 
         System.out.println("Leaving AsyncServlet.doGet(). Request ID = " + id +
                 ", isAsyncStarted = " + req.isAsyncStarted());
