@@ -57,13 +57,13 @@ public class HomeController {
          * 3) If the location is relative with two leading '/' the container interprets it as a network-path
          * reference.
          *
-         * In this case, the URL and the servlet container root as follows:
+         * In this example, the URL, the URI and the servlet container's root as follows:
          *     request.getRequestURL(): http://localhost:8080/site/
          *     request.getRequestURI(): /site/
          *     request.getContextPath(): /site
          */
-//        return new RedirectView("/site/{homeUrl}", true); // case (2
-        return logger.traceExit(new RedirectView("{homeUrl}", true)); // case (1
+        return logger.traceExit(new RedirectView("/{homeUrl}", true)); // case (2
+//        return logger.traceExit(new RedirectView("{homeUrl}", true)); // case (1
     }
 
     @RequestMapping(value = "/home", method = {RequestMethod.GET})
