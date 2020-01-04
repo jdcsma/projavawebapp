@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="methodTraceLayoutPattern">
+            %highlight{%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} %method - %msg%n}
+        </Property>
+        <Property name="consoleLayoutPattern">
+            %highlight{%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n}
+        </Property>
+        <Property name="fileLayoutPattern">
+            %d{HH:mm:ss.SSS} [%t] %X{id} %X{username} %-5level %c{36} %l: %msg%n
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="MethodTrace" target="SYSTEM_OUT">
+            <PatternLayout pattern="${methodTraceLayoutPattern}"/>
+        </Console>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${consoleLayoutPattern}"/>
+        </Console>
+        <RollingFile name="RollingFileAppender" fileName="${sys:catalina.base}/logs/application.${date:yyyy-MM-dd}.log"
+                     filePattern="${sys:catalina.base}/logs/application.%d{yyyy-MM-dd}.%i.log">
+            <PatternLayout>
+                <pattern>${fileLayoutPattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy min="1" max="4"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+            <appenderRef ref="RollingFileAppender"/>
+        </Root>
+        <Logger name="jun.projavawebapp" level="info"/>
+        <Logger name="jun.projavawebapp" level="trace" additivity="false">
+            <AppenderRef ref="MethodTrace"/>
+        </Logger>
+        <Logger name="org.apache" level="info"/>
+        <Logger name="org.springframework" level="info"/>
+    </Loggers>
+</Configuration>
+
