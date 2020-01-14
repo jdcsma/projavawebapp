@@ -10,7 +10,7 @@ public class TicketBuilder {
     private static volatile int sequence;
 
     private int id;
-    private String consumer;
+    private String customer;
     private String subject;
     private String body;
     private Map<String, Attachment> attachments;
@@ -20,8 +20,8 @@ public class TicketBuilder {
         sequence = 1;
     }
 
-    public TicketBuilder setConsumer(String consumer) {
-        this.consumer = consumer;
+    public TicketBuilder setCustomer(String customer) {
+        this.customer = customer;
         return this;
     }
 
@@ -47,7 +47,7 @@ public class TicketBuilder {
 
     public Ticket build() throws NullPointerException {
 
-        Objects.requireNonNull(this.consumer, "consumer must not null");
+        Objects.requireNonNull(this.customer, "customer must not null");
         Objects.requireNonNull(this.subject, "subject must not null");
         Objects.requireNonNull(this.body, "body must not null");
 
@@ -56,7 +56,7 @@ public class TicketBuilder {
         }
 
         return new Ticket(this.id,
-                this.consumer, this.subject,
+                this.customer, this.subject,
                 this.body, this.attachments);
     }
 }

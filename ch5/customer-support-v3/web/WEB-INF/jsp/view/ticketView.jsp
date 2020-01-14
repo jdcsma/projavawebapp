@@ -1,7 +1,7 @@
 
 <html>
 <head>
-    <title>Consumer Support v3</title>
+    <title>Customer Support v3</title>
 </head>
 <body>
     <%
@@ -12,7 +12,7 @@
         <c:param name="action" value="logout"/>
     </c:url>">退出</a><br/>
     <h2>票据#<%= ticketId %>：<%= ticket.getSubject() %></h2>
-    <i>客户：<%= ticket.getConsumer() %></i><br/>
+    <i>客户：<%= ticket.getCustomer() %></i><br/>
     <%= ticket.getBody() %><br/><br/>
     <%
         if (ticket.getNumberOfAttachments() > 0) {

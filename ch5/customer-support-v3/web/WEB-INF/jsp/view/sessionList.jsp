@@ -32,7 +32,7 @@
 
 <html>
 <head>
-    <title>Consumer Support v3</title>
+    <title>Customer Support v3</title>
 </head>
 <body>
 <a href="<c:url value="login">

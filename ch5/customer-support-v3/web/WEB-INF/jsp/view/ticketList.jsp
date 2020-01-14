@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Consumer Support v3</title>
+    <title>Customer Support v3</title>
 </head>
 <body>
     <%
@@ -27,7 +27,7 @@
         Ticket #<%= ticketId %>: <a href="<c:url value="ticket">
                 <c:param name="ticketId" value="<%= ticketId %>"/>
             </c:url>"><%= ticket.getSubject() %></a>（客户：
-            <%= ticket.getConsumer() %>）<br/>
+            <%= ticket.getCustomer() %>）<br/>
     <%
             }
         }

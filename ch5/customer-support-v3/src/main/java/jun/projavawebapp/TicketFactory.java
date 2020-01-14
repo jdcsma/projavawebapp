@@ -30,7 +30,7 @@ public class TicketFactory {
 
         TicketBuilder builder = new TicketBuilder();
 
-        builder.setConsumer((String) request.getSession()
+        builder.setCustomer((String) request.getSession()
                 .getAttribute("username"));
 
         // Process the uploaded items

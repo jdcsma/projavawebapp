@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>jun.projavawebapp</groupId>
-    <artifactId>consumer-support-v3</artifactId>
+    <artifactId>customer-support-v3</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ConsumerSupport-v3</name>
+    <name>CustomerSupport-v3</name>
     <packaging>war</packaging>
 
     <properties>

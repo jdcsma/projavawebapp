@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Consumer Support v3</title>
+    <title>Customer Support v3</title>
 </head>
 <body>
     <h2>登陆</h2>

@@ -8,16 +8,16 @@ import java.util.Map;
 public class Ticket {
 
     private int id;
-    private String consumer;
+    private String customer;
     private String subject;
     private String body;
     private Map<String, Attachment> attachments;
 
-    public Ticket(int id, String consumer,
+    public Ticket(int id, String customer,
                   String subject, String body,
                   Map<String, Attachment> attachments) {
         this.id = id;
-        this.consumer = consumer;
+        this.customer = customer;
         this.subject = subject;
         this.body = body;
         this.attachments = attachments;
@@ -27,8 +27,8 @@ public class Ticket {
         return id;
     }
 
-    public String getConsumer() {
-        return consumer;
+    public String getCustomer() {
+        return customer;
     }
 
     public String getSubject() {
@@ -81,7 +81,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", consumer='" + consumer + '\'' +
+                ", customer='" + customer + '\'' +
                 ", subject='" + subject + '\'' +
                 '}';
     }
