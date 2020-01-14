@@ -16,11 +16,10 @@ import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
         includeFilters = @ComponentScan.Filter(Endpoint.class)
 )
 @ImportResource("classpath:jun/projavawebapp/config/soapServletContext.xml")
-public class SoapServletContextConfiguration
-{
+public class SoapServletContextConfiguration {
+
     @Bean
-    public WebServiceMessageFactory messageFactory()
-    {
+    public WebServiceMessageFactory messageFactory() {
         SaajSoapMessageFactory factory = new SaajSoapMessageFactory();
         factory.setSoapVersion(SoapVersion.SOAP_12);
         return factory;

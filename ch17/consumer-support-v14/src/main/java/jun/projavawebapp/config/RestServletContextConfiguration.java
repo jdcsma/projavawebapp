@@ -31,14 +31,20 @@ import java.util.List;
         basePackages = "jun.projavawebapp.site",
         useDefaultFilters = false,
         includeFilters =
-        @ComponentScan.Filter({RestEndpoint.class, RestEndpointAdvice.class})
+        @ComponentScan.Filter({
+                RestEndpoint.class, RestEndpointAdvice.class
+        })
 )
-public class RestServletContextConfiguration implements WebMvcConfigurer
-{
-    @Inject ObjectMapper objectMapper;
-    @Inject Marshaller marshaller;
-    @Inject Unmarshaller unmarshaller;
-    @Inject SpringValidatorAdapter validator;
+public class RestServletContextConfiguration implements WebMvcConfigurer {
+
+    @Inject
+    ObjectMapper objectMapper;
+    @Inject
+    Marshaller marshaller;
+    @Inject
+    Unmarshaller unmarshaller;
+    @Inject
+    SpringValidatorAdapter validator;
 
     @Override
     public void configureMessageConverters(
@@ -68,22 +74,19 @@ public class RestServletContextConfiguration implements WebMvcConfigurer
 
     @Override
     public void configureContentNegotiation(
-            ContentNegotiationConfigurer configurer)
-    {
+            ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(false).favorParameter(false)
                 .ignoreAcceptHeader(false)
                 .defaultContentType(MediaType.APPLICATION_JSON);
     }
 
     @Override
-    public Validator getValidator()
-    {
+    public Validator getValidator() {
         return this.validator;
     }
 
     @Bean
-    public LocaleResolver localeResolver()
-    {
+    public LocaleResolver localeResolver() {
         return new AcceptHeaderLocaleResolver();
     }
 }
