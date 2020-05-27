@@ -136,7 +136,7 @@ public class RootContextConfiguration implements
         properties.put("hibernate.ejb.use_class_enhancer", "true");
 
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL8DBDialect");
+        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
 
         LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();

@@ -125,7 +125,7 @@ public class RootContextConfiguration implements
                 "none");
 
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5InnoDBDialect");
+        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
 
         LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();
